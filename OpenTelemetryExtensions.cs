@@ -8,7 +8,7 @@ using OpenTelemetry.Trace;
 
 namespace Dysnomia.Common.OpenTelemetry {
 	public static class OpenTelemetryExtensions {
-		public static void EnableOpenTelemetry(IServiceCollection serviceCollection, IHostEnvironment environment) {
+		public static void EnableOpenTelemetry(this IServiceCollection serviceCollection, IHostEnvironment environment) {
 			var openTelemetryBuilder = serviceCollection.AddOpenTelemetry()
 				.WithTracing(otBuilder => {
 
