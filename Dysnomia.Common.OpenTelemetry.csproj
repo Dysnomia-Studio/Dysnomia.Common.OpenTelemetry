@@ -4,6 +4,17 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<Authors>Dysnomia</Authors>
+		<Description>OpenTelemetry helper for Dysnomia and Elanis' projects</Description>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageProjectUrl>https://github.com/Dysnomia-Studio/Dysnomia.Common.OpenTelemetry</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/Dysnomia-Studio/Dysnomia.Common.OpenTelemetry</RepositoryUrl>
+		<RepositoryType>Github</RepositoryType>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<Version>1.0.0</Version>
+		<AssemblyVersion>1.0.0</AssemblyVersion>
+		<FileVersion>1.0.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -17,6 +28,19 @@
 		<PackageReference Include="OpenTelemetry.Instrumentation.Process" Version="1.12.0-beta.1" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
 		<PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.12.0-beta.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="LICENSE">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>
