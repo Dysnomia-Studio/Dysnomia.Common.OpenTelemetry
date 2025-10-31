@@ -61,5 +61,3 @@ jobs:
     - name: Push
       if: startsWith(github.event.ref, 'refs/tags/')
       run: dotnet nuget push -s ${{ env.NUGET_SERVER_ADRESS }} -k ${{ env.NUGET_SERVER_KEY }} $(ls out/*.nupkg | head -1)
-
-
