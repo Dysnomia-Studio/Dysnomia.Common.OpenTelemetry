@@ -14,10 +14,11 @@ env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   CSPROJ: Dysnomia.Common.OpenTelemetry.csproj
   NUGET_SERVER_ADRESS: https://api.nuget.org/v3/index.json
-  NUGET_SERVER_KEY: ${{ secrets.NUGET_ORG_KEY }}
 
 jobs:
   build:
+    permissions:
+      id-token: write  # enable GitHub OIDC token issuance for this job
 
     runs-on: ubuntu-latest
 
@@ -58,6 +59,15 @@ jobs:
 
     - name: Pack
       run: dotnet pack ${{ env.CSPROJ }} -c Release -o out 
-    - name: Push
+
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
       if: startsWith(github.event.ref, 'refs/tags/')
-      run: dotnet nuget push -s ${{ env.NUGET_SERVER_ADRESS }} -k ${{ env.NUGET_SERVER_KEY }} $(ls out/*.nupkg | head -1)
+      with:
+        user: ${{ secrets.NUGET_USER }}
+  
+    # Push the package
+    - name: NuGet push
+      if: startsWith(github.event.ref, 'refs/tags/')
+      run: dotnet nuget push --api-key ${{steps.login.outputs.NUGET_API_KEY}} --source ${{ env.NUGET_SERVER_ADRESS }} $(ls out/*.nupkg | head -1)
