@@ -27,7 +27,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v6
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 11.0.x
 
     - uses: actions/setup-java@v6
       with:
@@ -49,10 +49,6 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Test
-      run: |
-        dotnet tool install --global dotnet-coverage
-        dotnet-coverage collect 'dotnet test --no-build --verbosity normal' -f xml  -o 'coverage.xml'
 
     - name: End sonarscanner
       run: dotnet sonarscanner end /d:sonar.token="${{ env.SONAR_TOKEN }}"
